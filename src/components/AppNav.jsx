@@ -1,10 +1,12 @@
 import React from 'react';
 
-const AppNav = ({ navItems }) => (
+const AppNav = ({ navItems = [] }) => (
   <nav>
     <ul>
       {navItems.map(item => (
-        <li key={item.id}>{item.value}</li>
+        <li key={item}>
+          <a href="/">{item}</a>
+        </li>
       ))}
     </ul>
   </nav>
