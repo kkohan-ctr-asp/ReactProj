@@ -1,25 +1,29 @@
 import React from 'react';
 import Filter from './Filter';
+import MenuCard from './MenuCard';
 
-const DishesMenu = ({ dishes, filter, onFilterChange }) => {
+const DishesMenu = ({
+  dishes,
+  filter,
+  onFilterChange,
+  onDelete,
+  onShowMoreInfo,
+}) => {
   return (
     <div>
       <Filter value={filter} onChange={onFilterChange} />
       <section>
-        {dishes.map(dish => {
-          const { id, name, image, description, price, ingredients } = dish;
-          return (
-            <div key={id}>
-              <h2>{name}</h2>
-              <p>{description}</p>
-              <img src={image} alt={name} width="100" height="100" />
-              <span>{price}</span>
-              <p>
-                {ingredients.map(ingredient => `${ingredient.toLowerCase()}, `)}
-              </p>
-            </div>
-          );
-        })}
+        {dishes.map(dish => (
+          <li key={dish.id}>
+            <MenuCard
+              name={dish.name}
+              price={dish.price}
+              image={dish.image}
+              onDelete={() => onDelete(dish.id)}
+              onShowMoreInfo={() => onShowMoreInfo(dish.id)}
+            />
+          </li>
+        ))}
       </section>
     </div>
   );
