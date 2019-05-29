@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import Header from './Header';
-import Modal from './Modal';
+import Header from './Header/Header';
+import Modal from './Modal/Modal';
+import Tabs from './Tabs/Tabs';
+import tabsData from './Tabs.json';
 
 export default class App extends Component {
   state = { isModalOpen: false };
@@ -23,6 +25,7 @@ export default class App extends Component {
           Open modal
         </button>
         {isModalOpen && <Modal onClose={this.handleCloseModal} />}
+        <Tabs items={tabsData} />
       </div>
     );
   }

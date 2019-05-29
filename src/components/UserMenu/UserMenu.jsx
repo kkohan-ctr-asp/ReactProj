@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
-import Dropdown from './Dropdown';
-import Avatar from './Avatar';
-import avatarImg from '../avatar.png';
+import Dropdown from './Dropdown/Dropdown';
+import Avatar from '../Avatar/Avatar';
+import styles from './UserMenu.module.css';
 
 export default class UserMenu extends Component {
   containerRef = createRef();
@@ -43,18 +43,18 @@ export default class UserMenu extends Component {
   };
 
   render() {
-    const { userName } = this.props;
+    const { userName, avatarImg } = this.props;
     const { isDropDownOpen } = this.state;
 
     return (
       // eslint-disable-next-line
       <div
+        className={styles.container}
         onClick={this.openDropdown}
-        className="UserMenu"
         ref={this.containerRef}
       >
         <Avatar logoImage={avatarImg} />
-        <span className="UserName">{userName}</span>
+        <span className={styles.name}>{userName}</span>
         {isDropDownOpen && <Dropdown />}
       </div>
     );

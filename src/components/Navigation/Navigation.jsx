@@ -1,11 +1,14 @@
 import React from 'react';
+import styles from './Navigation.module.css';
 
 const AppNav = ({ navItems = [] }) => (
   <nav>
-    <ul>
+    <ul className={styles.list}>
       {navItems.map(item => (
         <li key={item}>
-          <a href="/">{item}</a>
+          <a href="/" className={styles.link}>
+            {item}
+          </a>
         </li>
       ))}
     </ul>
