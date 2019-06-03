@@ -1,8 +1,9 @@
 import React from 'react';
+import DishesMenuContainer from '../modules/menu/DishesMenuContainer';
 
 const MenuPage = () => (
   <div>
-    <h2>Menu Page</h2>
+    <DishesMenuContainer />
   </div>
 );
 

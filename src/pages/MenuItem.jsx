@@ -1,8 +1,9 @@
 import React from 'react';
+import MenuItem from '../modules/menu/MenuItemContainer';
 
-const MenuItemPage = () => (
+const MenuItemPage = ({ match }) => (
   <div>
-    <h2>MenuItem Page</h2>
+    <MenuItem id={match.params.id} />
   </div>
 );
 

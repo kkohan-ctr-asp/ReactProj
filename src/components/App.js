@@ -12,7 +12,7 @@ import ContactPage from '../pages/Contact';
 import DeliveryPage from '../pages/Delivery';
 // import FavoritesPage from '../pages/Favorites';
 import MenuPage from '../pages/Menu';
-// import MenuItemPage from '../pages/MenuItem';
+import MenuItemPage from '../pages/MenuItem';
 import OrderHistoryPage from '../pages/OrderHistory';
 import PlannerPage from '../pages/Planner';
 
@@ -25,7 +25,8 @@ const App = () => (
   <>
     <Header />
     <Switch>
-      <Route path={routes.menu.root} component={MenuPage} />
+      <Route exact path={routes.menu.root} component={MenuPage} />
+      <Route path={routes.menu.item} component={MenuItemPage} />
       <Route path={routes.about} component={AboutPage} />
       <Route path={routes.contact} component={ContactPage} />
       <Route path={routes.delivery} component={DeliveryPage} />

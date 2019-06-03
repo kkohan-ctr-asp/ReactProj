@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import DishesMenu from '../modules/menu/DishesMenuContainer';
-import * as API from '../services/menu-api';
+import DishesMenu from './DishesMenuView';
+import * as API from '../../services/menu-api';
+import Loader from '../../components/Loader';
 
 const filterDishNames = (filter, dishes) =>
   dishes.filter(dish => dish.name.toLowerCase().includes(filter.toLowerCase()));
@@ -10,15 +11,23 @@ const INITIAL_STATE = {
   menu: [],
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class MenuPage extends Component {
-  state = { ...INITIAL_STATE };
+export default class DishesMenuContainer extends Component {
+  state = { ...INITIAL_STATE, isLoading: false, error: null };
 
   async componentDidMount() {
-    const menu = await API.getAllMenuItems();
-    this.setState({
-      menu,
-    });
+    this.setState({ isLoading: true });
+    try {
+      const menu = await API.getAllMenuItems();
+      this.setState({
+        menu,
+        isLoading: false,
+      });
+    } catch (error) {
+      this.setState({
+        error,
+        isLoading: false,
+      });
+    }
   }
 
   handleDeleteItem = async id => {
@@ -41,30 +50,15 @@ export default class MenuPage extends Component {
     });
   };
 
-  handleAddMenuItem = async () => {
-    const item = {
-      name: `New name ${Date.now()}`,
-      price: Math.random(),
-      image: 'https://placeimg.com/640/480/animals',
-    };
-
-    const newItem = await API.addMenuItem(item);
-    this.setState(state => ({
-      menu: [...state.menu, newItem],
-    }));
-  };
-
   render() {
-    const { filter, menu } = this.state;
+    const { filter, menu, isLoading, error } = this.state;
 
     const filteredDishes = filterDishNames(filter, menu);
 
     return (
       <div>
-        <button type="button" onClick={this.handleAddMenuItem}>
-          Add menu item
-        </button>
-
+        {isLoading && <Loader />}
+        {error && <h1>Error</h1>}
         <DishesMenu
           dishes={filteredDishes}
           filter={filter}
