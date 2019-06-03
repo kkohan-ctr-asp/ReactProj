@@ -19,11 +19,10 @@ import PlannerPage from '../pages/Planner';
 // import Modal from './Modal/Modal';
 // import Tabs from './Tabs/Tabs';
 // import tabsData from './Tabs.json';
-
 import routes from '../configs/routes';
 
 const App = () => (
-  <div>
+  <>
     <Header />
     <Switch>
       <Route path={routes.menu.root} component={MenuPage} />
@@ -34,7 +33,7 @@ const App = () => (
       <Route path={routes.orderHistory} component={OrderHistoryPage} />
       <Route path={routes.planner} component={PlannerPage} />
     </Switch>
-  </div>
+  </>
 );
 
 export default App;
