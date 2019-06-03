@@ -1,12 +1,12 @@
 import React from 'react';
 import AppNav from '../Navigation/Navigation';
 import HeaderLogo from '../Logo/Logo';
-import UserMenu from '../UserMenu/UserMenu';
+import UserMenu from '../../modules/user/UserMenu/UserMenu';
 import appLogo from './assets/logo.jpg';
 import avatarImg from './assets/avatar.png';
-import styles from './Header.module.css';
 
-const NAV_ITEMS = ['Menu', 'About', 'Contact', 'Delivery'];
+import styles from './Header.module.css';
+import NAV_ITEMS from '../../configs/main-nav';
 
 const Header = () => (
   <header className={styles.header}>

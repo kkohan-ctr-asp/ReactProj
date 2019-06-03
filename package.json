@@ -5,8 +5,10 @@
   "dependencies": {
     "eslint-config-react-app": "^4.0.1",
     "eslint-plugin-react-app": "^5.0.1",
+    "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1"
   },
   "scripts": {

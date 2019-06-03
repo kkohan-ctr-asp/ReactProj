@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import Dropdown from './Dropdown/Dropdown';
-import Avatar from '../Avatar/Avatar';
+import Avatar from '../../../components/Avatar/Avatar';
 import styles from './UserMenu.module.css';
 
 export default class UserMenu extends Component {
@@ -28,8 +28,9 @@ export default class UserMenu extends Component {
     const isTargetInsideContainer = this.containerRef.current.contains(
       e.target,
     );
+    const isTargetLink = e.target.nodeName === 'A';
 
-    if (isDropDownOpen && !isTargetInsideContainer) {
+    if ((isDropDownOpen && !isTargetInsideContainer) || isTargetLink) {
       this.closeDropdown();
     }
   };
