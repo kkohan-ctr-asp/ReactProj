@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderTable = ({ orders, handleDeleteOrder }) => (
+const OrderTable = ({ orders, handleDeleteOrder, handleOpenModal }) => (
   <table>
     <thead>
       <tr>
@@ -21,6 +21,9 @@ const OrderTable = ({ orders, handleDeleteOrder }) => (
           <td>
             <button type="button" onClick={() => handleDeleteOrder(order.id)}>
               Delete
+            </button>
+            <button type="button" onClick={() => handleOpenModal(order.id)}>
+              Details
             </button>
           </td>
         </tr>

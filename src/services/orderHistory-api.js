@@ -11,7 +11,7 @@ const getOrderHistory = async () => {
 const getOrderById = async id => {
   const res = await axios.get(`${BASE_URL}/${id}`);
 
-  return res;
+  return res.data;
 };
 
 const deleteOrder = async id => {

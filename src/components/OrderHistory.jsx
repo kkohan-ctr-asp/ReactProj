@@ -2,15 +2,32 @@ import React, { Component } from 'react';
 import OrderTable from './OrderTable';
 import * as API from '../services/orderHistory-api';
 import OrderHistoryForm from './OrderHistoryForm';
+import Modal from './Modal/Modal';
 
 export default class OrderHistory extends Component {
-  state = { orders: [] };
+  state = {
+    orders: [],
+    isModalOpen: false,
+    orderForModal: '',
+    isLoading: false,
+  };
 
   async componentDidMount() {
     const orders = await API.getOrderHistory();
 
     this.setState({ orders });
   }
+
+  handleOpenModal = async id => {
+    this.setState({ isLoading: true });
+    const order = await API.getOrderById(id);
+    const orderForModal = JSON.stringify(order);
+    this.setState({ orderForModal, isModalOpen: true, isLoading: false });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ isModalOpen: false });
+  };
 
   handleAddOrder = async (price, address, rating) => {
     const order = {
@@ -37,14 +54,20 @@ export default class OrderHistory extends Component {
   };
 
   render() {
-    const { orders } = this.state;
+    const { orders, isModalOpen, orderForModal, isLoading } = this.state;
     return (
       <div>
+        {isLoading && <div>Loading</div>}
         <OrderHistoryForm onSubmit={this.handleAddOrder} />
         <OrderTable
           orders={orders}
           handleDeleteOrder={this.handleDeleteOrder}
+          handleOpenModal={this.handleOpenModal}
         />
+
+        {isModalOpen && (
+          <Modal onClose={this.handleCloseModal} value={orderForModal} />
+        )}
       </div>
     );
   }
