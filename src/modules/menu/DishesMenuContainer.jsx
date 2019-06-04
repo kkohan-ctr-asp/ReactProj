@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DishesMenu from './DishesMenuView';
 import * as API from '../../services/menu-api';
-import Loader from '../../components/Loader';
 
 const filterDishNames = (filter, dishes) =>
   dishes.filter(dish => dish.name.toLowerCase().includes(filter.toLowerCase()));
@@ -57,7 +56,7 @@ export default class DishesMenuContainer extends Component {
 
     return (
       <div>
-        {isLoading && <Loader />}
+        {isLoading && <div>Loading...</div>}
         {error && <h1>Error</h1>}
         <DishesMenu
           dishes={filteredDishes}

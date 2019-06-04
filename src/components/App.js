@@ -1,38 +1,85 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+// import Loadable from 'react-loadable';
 
 import Header from './Header/Header';
 
-import AboutPage from '../pages/About';
-import AccountPage from '../pages/Account';
+// import AboutPage from '../pages/About';
+// import AccountPage from '../pages/Account';
 // import AuthPage from '../pages/Auth';
 // import CartPage from '../pages/Cart';
 // import CheckoutPage from '../pages/Checkout';
-import ContactPage from '../pages/Contact';
-import DeliveryPage from '../pages/Delivery';
+// import ContactPage from '../pages/Contact';
+// import DeliveryPage from '../pages/Delivery';
 // import FavoritesPage from '../pages/Favorites';
-import MenuPage from '../pages/Menu';
-import MenuItemPage from '../pages/MenuItem';
-import OrderHistoryPage from '../pages/OrderHistory';
-import PlannerPage from '../pages/Planner';
+// import MenuPage from '../pages/Menu';
+// import MenuItemPage from '../pages/MenuItem';
+// import OrderHistoryPage from '../pages/OrderHistory';
+// import PlannerPage from '../pages/Planner';
+import Loader from './Loader/Loader';
 
 // import Modal from './Modal/Modal';
 // import Tabs from './Tabs/Tabs';
 // import tabsData from './Tabs.json';
 import routes from '../configs/routes';
 
+// const AsyncMenuPage = Loadable({
+//   loader: () => import(/* webpackChunkName: "Menu-page" */ '../pages/Menu'),
+//   loading: Loader,
+//   timeout: 5000,
+//   delay: 300,
+// });
+
+// const AsyncMenuItemPage = Loadable({
+//   loader: () =>
+//     import(/* webpackChunkName: "Menu-item-page" */ '../pages/MenuItem'),
+//   loading: Loader,
+//   timeout: 5000,
+//   delay: 300,
+// });
+
+const AsyncMenuPage = lazy(() =>
+  import(/* webpackChunkName: "Menu-page" */ '../pages/Menu'),
+);
+const AsyncMenuItemPage = lazy(() =>
+  import(/* webpackChunkName: "Menu-item-page" */ '../pages/MenuItem'),
+);
+
+const AsyncAboutPage = lazy(() =>
+  import(/* webpackChunkName: "About-page" */ '../pages/About'),
+);
+
+const AsyncContactPage = lazy(() =>
+  import(/* webpackChunkName: "Contact-page" */ '../pages/Contact'),
+);
+
+const AsyncDeliveryPage = lazy(() =>
+  import(/* webpackChunkName: "Delivery-page" */ '../pages/Delivery'),
+);
+const AsyncAccountPage = lazy(() =>
+  import(/* webpackChunkName: "Account-page" */ '../pages/Account'),
+);
+const AsyncOrderHistoryPage = lazy(() =>
+  import(/* webpackChunkName: "OrderHistory-page" */ '../pages/OrderHistory'),
+);
+const AsyncPlannerPage = lazy(() =>
+  import(/* webpackChunkName: "Planner-page" */ '../pages/Planner'),
+);
+
 const App = () => (
   <>
     <Header />
     <Switch>
-      <Route exact path={routes.menu.root} component={MenuPage} />
-      <Route path={routes.menu.item} component={MenuItemPage} />
-      <Route path={routes.about} component={AboutPage} />
-      <Route path={routes.contact} component={ContactPage} />
-      <Route path={routes.delivery} component={DeliveryPage} />
-      <Route path={routes.account} component={AccountPage} />
-      <Route path={routes.orderHistory} component={OrderHistoryPage} />
-      <Route path={routes.planner} component={PlannerPage} />
+      <Suspense fallback={Loader}>
+        <Route exact path={routes.menu.root} component={AsyncMenuPage} />
+        <Route path={routes.menu.item} component={AsyncMenuItemPage} />
+        <Route path={routes.about} component={AsyncAboutPage} />
+        <Route path={routes.contact} component={AsyncContactPage} />
+        <Route path={routes.delivery} component={AsyncDeliveryPage} />
+        <Route path={routes.account} component={AsyncAccountPage} />
+        <Route path={routes.orderHistory} component={AsyncOrderHistoryPage} />
+        <Route path={routes.planner} component={AsyncPlannerPage} />
+      </Suspense>
     </Switch>
   </>
 );
