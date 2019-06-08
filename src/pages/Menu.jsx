@@ -1,9 +1,9 @@
 import React from 'react';
 import DishesMenuContainer from '../modules/menu/DishesMenuContainer';
 
-const MenuPage = () => (
+const MenuPage = ({ location, history }) => (
   <div>
-    <DishesMenuContainer />
+    <DishesMenuContainer location={location} history={history} />
   </div>
 );
 

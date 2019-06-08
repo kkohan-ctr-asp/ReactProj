@@ -1,30 +1,44 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:3001';
-const BASE_PATH = '/menu';
+const MENU_PATH = '/menu';
+const CATEGORY_PATH = '/categories';
 
-const getAllMenuItems = async () => {
-  const res = await axios.get(BASE_PATH);
-
-  return res.data;
-};
-
-const getMenuItemById = async id => {
-  const res = await axios.get(`${BASE_PATH}/${id}`);
+export const getAllMenuItems = async () => {
+  const res = await axios.get(MENU_PATH);
 
   return res.data;
 };
 
-const deleteMenuItem = async id => {
-  const res = await axios.delete(`${BASE_PATH}/${id}`);
+export const getMenuItemById = async id => {
+  const res = await axios.get(`${MENU_PATH}/${id}`);
+
+  return res.data;
+};
+
+export const deleteMenuItem = async id => {
+  const res = await axios.delete(`${MENU_PATH}/${id}`);
 
   return res.status === 200;
 };
 
-const addMenuItem = async item => {
-  const res = await axios.post(BASE_PATH, item);
+export const addMenuItem = async item => {
+  const res = await axios.post(MENU_PATH, item);
 
   return res.data;
 };
 
-export { getAllMenuItems, getMenuItemById, deleteMenuItem, addMenuItem };
+export const getCategories = async () => {
+  const res = await axios.get(CATEGORY_PATH);
+  return res.data;
+};
+
+export const getMenuItemsWithCategory = async category => {
+  let res;
+  if (category !== 'all') {
+    res = await axios.get(`${MENU_PATH}?category=${category}`);
+  } else {
+    res = await axios.get(MENU_PATH);
+  }
+  return res.data;
+};

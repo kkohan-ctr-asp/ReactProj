@@ -37,7 +37,9 @@ import routes from '../configs/routes';
 //   timeout: 5000,
 //   delay: 300,
 // });
-
+const AsyncMainPage = lazy(() =>
+  import(/* webpackChunkName: "Main-page" */ '../pages/Main'),
+);
 const AsyncMenuPage = lazy(() =>
   import(/* webpackChunkName: "Menu-page" */ '../pages/Menu'),
 );
@@ -71,6 +73,7 @@ const App = () => (
     <Header />
     <Switch>
       <Suspense fallback={Loader}>
+        <Route exact path="/" component={AsyncMainPage} />
         <Route exact path={routes.menu.root} component={AsyncMenuPage} />
         <Route path={routes.menu.item} component={AsyncMenuItemPage} />
         <Route path={routes.about} component={AsyncAboutPage} />

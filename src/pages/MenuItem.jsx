@@ -1,9 +1,9 @@
 import React from 'react';
 import MenuItem from '../modules/menu/MenuItemContainer';
 
-const MenuItemPage = ({ match }) => (
+const MenuItemPage = ({ match, location, history }) => (
   <div>
-    <MenuItem id={match.params.id} />
+    <MenuItem id={match.params.id} location={location} history={history} />
   </div>
 );
 
