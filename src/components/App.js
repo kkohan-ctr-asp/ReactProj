@@ -16,7 +16,7 @@ import Header from './Header/Header';
 // import MenuItemPage from '../pages/MenuItem';
 // import OrderHistoryPage from '../pages/OrderHistory';
 // import PlannerPage from '../pages/Planner';
-import Loader from './Loader/Loader';
+// import Loader from './Loader/Loader';
 
 // import Modal from './Modal/Modal';
 // import Tabs from './Tabs/Tabs';
@@ -68,13 +68,26 @@ const AsyncPlannerPage = lazy(() =>
   import(/* webpackChunkName: "Planner-page" */ '../pages/Planner'),
 );
 
+const AsyncAddMenuItemPage = lazy(() =>
+  import(/* webpackChunkName: "AddMenuItem-page" */ '../pages/AddMenuItem'),
+);
+
+const AsyncNotFoundPage = lazy(() =>
+  import(/* webpackChunkName: "NotFound-page" */ '../pages/NotFound'),
+);
+
 const App = () => (
   <>
     <Header />
-    <Switch>
-      <Suspense fallback={Loader}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
         <Route exact path="/" component={AsyncMainPage} />
         <Route exact path={routes.menu.root} component={AsyncMenuPage} />
+        <Route
+          exact
+          path={routes.menu.addMenuItem}
+          component={AsyncAddMenuItemPage}
+        />
         <Route path={routes.menu.item} component={AsyncMenuItemPage} />
         <Route path={routes.about} component={AsyncAboutPage} />
         <Route path={routes.contact} component={AsyncContactPage} />
@@ -82,8 +95,9 @@ const App = () => (
         <Route path={routes.account} component={AsyncAccountPage} />
         <Route path={routes.orderHistory} component={AsyncOrderHistoryPage} />
         <Route path={routes.planner} component={AsyncPlannerPage} />
-      </Suspense>
-    </Switch>
+        <Route component={AsyncNotFoundPage} />
+      </Switch>
+    </Suspense>
   </>
 );
 

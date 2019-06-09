@@ -3,6 +3,7 @@ export default Object.freeze({
   menu: {
     root: '/menu',
     item: '/menu/:id',
+    addMenuItem: '/menu/add',
   },
   about: '/about',
   orderHistory: '/order-history',

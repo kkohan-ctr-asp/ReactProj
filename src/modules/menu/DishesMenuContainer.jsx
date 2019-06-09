@@ -8,6 +8,7 @@ import * as API from '../../services/menu-api';
 const INITIAL_STATE = {
   filter: '',
   menu: [],
+  categories: [],
 };
 
 const filterDishNames = (filter, dishes) =>
@@ -54,11 +55,12 @@ export default class DishesMenuContainer extends Component {
   async componentDidUpdate(prevProps) {
     const prevCategory = getCategoryFromProps(prevProps);
     const nextCategory = getCategoryFromProps(this.props);
+    const categories = await API.getCategories();
 
     if (prevCategory !== nextCategory) {
       const menu = await API.getMenuItemsWithCategory(nextCategory);
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ menu });
+      this.setState({ menu, categories });
     }
   }
 
@@ -81,14 +83,23 @@ export default class DishesMenuContainer extends Component {
     }));
   };
 
-  handleShowMoreInfo = async id => {
-    const item = await API.getMenuItemById(id);
-    console.log(item);
-  };
+  // handleShowMoreInfo = async id => {
+  //   const item = await API.getMenuItemById(id);
+  //   console.log(item);
+  // };
 
   handleFilterChange = e => {
     this.setState({
       filter: e.target.value,
+    });
+  };
+
+  handleCategoryReset = () => {
+    const { location, history } = this.props;
+
+    history.push({
+      pathname: location.pathname,
+      search: `category=all`,
     });
   };
 
@@ -112,11 +123,12 @@ export default class DishesMenuContainer extends Component {
           filter={filter}
           onFilterChange={this.handleFilterChange}
           onDelete={this.handleDeleteItem}
-          onShowMoreInfo={this.handleShowMoreInfo}
+          // onShowMoreInfo={this.handleShowMoreInfo}
           categoriesOptions={categories}
           onCategoryChange={this.handleCategoryChange}
           categoryValue={currentValue}
           location={location}
+          onCategoryReset={this.handleCategoryReset}
         />
       </div>
     );
