@@ -1,8 +1,9 @@
 import React from 'react';
+import OrderHistory from '../components/OrderHistory/OrderHistory';
 
 const OrderHistoryPage = () => (
   <div>
-    <h2>OrderHistory Page</h2>
+    <OrderHistory />
   </div>
 );
 

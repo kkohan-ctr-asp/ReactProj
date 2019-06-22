@@ -41,16 +41,11 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { onClose } = this.props;
+    const { onClose, value } = this.props;
     return (
       <div className={styles.backdrop} ref={this.containerRef}>
         <div className={styles.container}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sint
-            beatae, earum officia quibusdam, nesciunt facilis consequuntur
-            maxime dolore ex culpa minus ipsum porro obcaecati facere a dolor
-            voluptas sequi!
-          </p>
+          <p>{value}</p>
           <button type="button" onClick={onClose}>
             Close
           </button>
