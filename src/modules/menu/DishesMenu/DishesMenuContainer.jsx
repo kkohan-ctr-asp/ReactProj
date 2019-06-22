@@ -1,66 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import queryString from 'query-string';
 
 import DishesMenu from './DishesMenuView';
-import * as API from '../../../services/menu-api';
-
-const INITIAL_STATE = {
-  filter: '',
-  menu: [],
-  categories: [],
-};
-
-const filterDishNames = (filter, dishes) =>
-  dishes.filter(dish => dish.name.toLowerCase().includes(filter.toLowerCase()));
+import { menuSelectors, menuOperations, menuActions } from '../Redux/menu';
 
 const getCategoryFromProps = props =>
   queryString.parse(props.location.search).category;
 
-export default class DishesMenuContainer extends Component {
-  state = { ...INITIAL_STATE, isLoading: false, error: null, categories: [] };
+class DishesMenuContainer extends Component {
+  componentDidMount() {
+    const { history, location, fetchMenu, fetchCategories } = this.props;
+    const category = getCategoryFromProps(this.props);
 
-  async componentDidMount() {
-    try {
-      const category = getCategoryFromProps(this.props);
-      this.setState({ isLoading: true });
-      const categories = await API.getCategories();
-      const { history, location } = this.props;
-
-      if (!category) {
-        history.replace({
-          pathname: location.pathname,
-          search: 'category=all',
-        });
-
-        return this.setState({
-          isLoading: false,
-        });
-      }
-      const menu = await API.getMenuItemsWithCategory(category);
-
-      return this.setState({
-        menu,
-        categories,
-        isLoading: false,
+    if (!category) {
+      history.replace({
+        pathname: location.pathname,
+        search: 'category=all',
       });
-    } catch (error) {
-      return this.setState({
-        error,
-        isLoading: false,
-      });
+      return;
     }
+    fetchCategories();
+    fetchMenu(category);
   }
 
   async componentDidUpdate(prevProps) {
+    const { fetchMenu, fetchCategories } = this.props;
     const prevCategory = getCategoryFromProps(prevProps);
     const nextCategory = getCategoryFromProps(this.props);
-    const categories = await API.getCategories();
 
     if (prevCategory !== nextCategory) {
-      const menu = await API.getMenuItemsWithCategory(nextCategory);
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ menu, categories });
+      fetchCategories();
+      fetchMenu(nextCategory);
     }
   }
 
@@ -75,23 +47,18 @@ export default class DishesMenuContainer extends Component {
   };
 
   handleDeleteItem = async id => {
-    const isOk = await API.deleteMenuItem(id);
-    if (!isOk) return;
-
-    this.setState(state => ({
-      menu: state.menu.filter(item => item.id !== id),
-    }));
+    const { deleteItem } = this.props;
+    deleteItem(id);
   };
 
-  handleShowMoreInfo = async id => {
-    const item = await API.getMenuItemById(id);
-    console.log(item);
-  };
+  // handleShowMoreInfo = async id => {
+  //   // const item = await API.getMenuItemById(id);
+  //   // console.log(item);
+  // };
 
-  handleFilterChange = e => {
-    this.setState({
-      filter: e.target.value,
-    });
+  handleFilterChange = ({ target }) => {
+    const { onFilterChange } = this.props;
+    onFilterChange(target.value);
   };
 
   handleCategoryReset = () => {
@@ -104,10 +71,16 @@ export default class DishesMenuContainer extends Component {
   };
 
   render() {
-    const { filter, menu, isLoading, error, categories } = this.state;
-    const { location } = this.props;
+    const {
+      filterValue,
+      menu,
+      isLoading,
+      error,
+      categories,
+      location,
+    } = this.props;
 
-    const filteredDishes = filterDishNames(filter, menu);
+    // const filteredDishes = filterDishNames(filter, menu);
 
     const currentValue = {
       value: getCategoryFromProps(this.props),
@@ -119,11 +92,10 @@ export default class DishesMenuContainer extends Component {
         {isLoading && <div>Loading...</div>}
         {error && <h1>Error!</h1>}
         <DishesMenu
-          dishes={filteredDishes}
-          filter={filter}
+          dishes={menu}
+          filter={filterValue}
           onFilterChange={this.handleFilterChange}
           onDelete={this.handleDeleteItem}
-          onShowMoreInfo={this.handleShowMoreInfo}
           categoriesOptions={categories}
           onCategoryChange={this.handleCategoryChange}
           categoryValue={currentValue}
@@ -134,3 +106,22 @@ export default class DishesMenuContainer extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  menu: menuSelectors.getFilteredItems(state),
+  isLoading: menuSelectors.getLoading(state),
+  categories: menuSelectors.getCategories(state),
+  filterValue: menuSelectors.getFilter(state),
+});
+
+const mapDispatchToProps = {
+  fetchMenu: menuOperations.fetchItems,
+  fetchCategories: menuOperations.fetchCategories,
+  deleteItem: menuOperations.deleteItem,
+  onFilterChange: menuActions.changeFilter,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DishesMenuContainer);

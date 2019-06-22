@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 
-import AddItemView from './AddItemView';
-import * as API from '../../../services/menu-api';
+import { connect } from 'react-redux';
+import { menuOperations } from '../Redux/menu';
 
-const INITIAL_STATE = {
-  name: '',
-  description: '',
-  image: '',
-  price: 0,
-  category: '',
-  ingredients: [],
-};
+import AddItemView from './AddItemView';
+
+// const INITIAL_STATE = {
+//   name: '',
+//   description: '',
+//   image: '',
+//   price: 0,
+//   category: '',
+//   ingredients: [],
+// };
 
 const TEST_ITEM = {
   name: 'Test',
@@ -21,12 +23,11 @@ const TEST_ITEM = {
   ingredients: ['Test', 'Test', 'Test'],
 };
 
-export default class AddItemContainer extends Component {
-  state = { ...INITIAL_STATE };
-
-  handleSubmit = async event => {
+class AddItemContainer extends Component {
+  handleSubmit = event => {
     event.preventDefault();
-    await API.addMenuItem(TEST_ITEM);
+    const { addItem } = this.props;
+    addItem(TEST_ITEM);
 
     const { history, location } = this.props;
 
@@ -44,3 +45,12 @@ export default class AddItemContainer extends Component {
     return <AddItemView onAdd={this.handleSubmit} />;
   }
 }
+
+const mapDispatchToProps = {
+  addItem: menuOperations.addItem,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddItemContainer);

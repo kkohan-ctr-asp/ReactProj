@@ -13,7 +13,6 @@ const DishesMenu = ({
   filter,
   onFilterChange,
   onDelete,
-  onShowMoreInfo,
   categoriesOptions,
   onCategoryChange,
   categoryValue,
@@ -56,9 +55,9 @@ const DishesMenu = ({
                 <MenuCard {...dish} />
               </Link>
               <div className="actions">
-                <button type="button" onClick={() => onShowMoreInfo(dish.id)}>
+                {/* <button type="button" onClick={() => onShowMoreInfo(dish.id)}>
                   More info
-                </button>
+                </button> */}
                 <button type="button" onClick={() => onDelete(dish.id)}>
                   Delete
                 </button>

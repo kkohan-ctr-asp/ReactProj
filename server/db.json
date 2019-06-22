@@ -109,6 +109,19 @@
         "Мясной бульон",
         "Чеснок"
       ]
+    },
+    {
+      "name": "Test",
+      "description": "TestTestTestTestTestTestTest",
+      "image": "",
+      "price": 124,
+      "category": "salad",
+      "ingredients": [
+        "Test",
+        "Test",
+        "Test"
+      ],
+      "id": 8
     }
   ],
   "categories": [
