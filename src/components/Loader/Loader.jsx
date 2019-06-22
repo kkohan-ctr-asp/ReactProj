@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './Loader.module.css';
 // const Loader = ({ error, timedOut, pastDelay, retry }) => {
 //   if (error) {
 //     return (
@@ -27,6 +27,6 @@ import React from 'react';
 //   return null;
 // };
 
-const Loader = () => <h1>Loading...</h1>;
+const Loader = () => <div className={styles.loader} />;
 
 export default Loader;

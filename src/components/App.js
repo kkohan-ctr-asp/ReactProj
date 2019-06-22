@@ -22,6 +22,7 @@ import Header from './Header/Header';
 // import Tabs from './Tabs/Tabs';
 // import tabsData from './Tabs.json';
 import routes from '../configs/routes';
+import Loader from './Loader/Loader';
 
 // const AsyncMenuPage = Loadable({
 //   loader: () => import(/* webpackChunkName: "Menu-page" */ '../pages/Menu'),
@@ -37,6 +38,7 @@ import routes from '../configs/routes';
 //   timeout: 5000,
 //   delay: 300,
 // });
+
 const AsyncMainPage = lazy(() =>
   import(/* webpackChunkName: "Main-page" */ '../pages/Main'),
 );
@@ -79,7 +81,7 @@ const AsyncNotFoundPage = lazy(() =>
 const App = () => (
   <>
     <Header />
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Switch>
         <Route exact path="/" component={AsyncMainPage} />
         <Route exact path={routes.menu.root} component={AsyncMenuPage} />
