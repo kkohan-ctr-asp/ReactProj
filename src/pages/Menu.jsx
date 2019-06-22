@@ -1,5 +1,5 @@
 import React from 'react';
-import DishesMenuContainer from '../modules/menu/DishesMenuContainer';
+import DishesMenuContainer from '../modules/menu/DishesMenu/DishesMenuContainer';
 
 const MenuPage = ({ location, history }) => (
   <div>

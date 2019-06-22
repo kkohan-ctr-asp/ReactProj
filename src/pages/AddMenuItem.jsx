@@ -1,5 +1,5 @@
 import React from 'react';
-import AddItemContainer from '../modules/menu/AddItemContainer';
+import AddItemContainer from '../modules/menu/AddItem/AddItemContainer';
 
 const AddMenuItemPage = ({ history, location }) => (
   <div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 
 import DishesMenu from './DishesMenuView';
-import * as API from '../../services/menu-api';
+import * as API from '../../../services/menu-api';
 
 const INITIAL_STATE = {
   filter: '',
@@ -83,10 +83,10 @@ export default class DishesMenuContainer extends Component {
     }));
   };
 
-  // handleShowMoreInfo = async id => {
-  //   const item = await API.getMenuItemById(id);
-  //   console.log(item);
-  // };
+  handleShowMoreInfo = async id => {
+    const item = await API.getMenuItemById(id);
+    console.log(item);
+  };
 
   handleFilterChange = e => {
     this.setState({
@@ -123,7 +123,7 @@ export default class DishesMenuContainer extends Component {
           filter={filter}
           onFilterChange={this.handleFilterChange}
           onDelete={this.handleDeleteItem}
-          // onShowMoreInfo={this.handleShowMoreInfo}
+          onShowMoreInfo={this.handleShowMoreInfo}
           categoriesOptions={categories}
           onCategoryChange={this.handleCategoryChange}
           categoryValue={currentValue}

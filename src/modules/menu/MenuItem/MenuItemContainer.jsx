@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MenuItemView from './MenuItemView';
-import * as API from '../../services/menu-api';
+import * as API from '../../../services/menu-api';
 
 export default class MenuItemContainer extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AddItemView from './AddItemView';
-import * as API from '../../services/menu-api';
+import * as API from '../../../services/menu-api';
 
 const INITIAL_STATE = {
   name: '',

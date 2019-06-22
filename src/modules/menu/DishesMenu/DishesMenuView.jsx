@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Select from 'react-select';
-import Filter from './Filter';
-import MenuCard from './MenuCard';
-import routes from '../../configs/routes';
+import Filter from '../Filter/Filter';
+import MenuCard from '../MenuCard/MenuCard';
+import routes from '../../../configs/routes';
+
+import s from './DishesMenu.module.css';
 
 const DishesMenu = ({
   dishes,
@@ -42,26 +44,28 @@ const DishesMenu = ({
         </button>
       )}
       <section>
-        {dishes.map(dish => (
-          <li key={dish.id}>
-            <Link
-              to={{
-                pathname: `${routes.menu.root}/${dish.id}`,
-                state: { from: location },
-              }}
-            >
-              <MenuCard {...dish} />
-            </Link>
-            <div className="actions">
-              <button type="button" onClick={() => onShowMoreInfo(dish.id)}>
-                More info
-              </button>
-              <button type="button" onClick={() => onDelete(dish.id)}>
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
+        <ul className={s.menu}>
+          {dishes.map(dish => (
+            <li key={dish.id}>
+              <Link
+                to={{
+                  pathname: `${routes.menu.root}/${dish.id}`,
+                  state: { from: location },
+                }}
+              >
+                <MenuCard {...dish} />
+              </Link>
+              <div className="actions">
+                <button type="button" onClick={() => onShowMoreInfo(dish.id)}>
+                  More info
+                </button>
+                <button type="button" onClick={() => onDelete(dish.id)}>
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );
