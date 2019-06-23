@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import getCategoryFromProps from '../../../utils/getCategoryFromProps';
 import SelectView from './SelectView';
-import { menuSelectors, menuOperations } from '../Redux/menu';
+import { menuSelectors, menuOperations } from '../../../redux/menu';
 
 class SelectContainer extends Component {
   componentDidMount() {

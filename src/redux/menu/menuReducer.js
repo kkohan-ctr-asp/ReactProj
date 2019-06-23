@@ -4,18 +4,34 @@ import types from './menuActionTypes';
 function menuReducer(state = [], { type, payload }) {
   switch (type) {
     case types.FETCH_SUCCESS:
-      return payload;
+      return payload.ids.menu;
 
     case types.ADD_ITEM_SUCCESS:
-      return [payload, ...state];
+      return [...state, payload.ids.menu];
 
     case types.DELETE_ITEM_SUCCESS:
-      return state.filter(item => item.id !== payload);
+      return state.filter(id => id !== payload);
 
     default:
       return state;
   }
 }
+
+// function menuReducer(state = [], { type, payload }) {
+//   switch (type) {
+//     case types.FETCH_SUCCESS:
+//       return payload;
+
+//     case types.ADD_ITEM_SUCCESS:
+//       return [payload, ...state];
+
+//     case types.DELETE_ITEM_SUCCESS:
+//       return state.filter(item => item.id !== payload);
+
+//     default:
+//       return state;
+//   }
+// }
 
 function categoriesReducer(state = [], { type, payload }) {
   switch (type) {

@@ -1,4 +1,7 @@
+import { normalize } from 'normalizr';
 import types from './menuActionTypes';
+
+import MenuSchema from '../schemas/MenuSchema';
 
 const changeFilter = filter => ({
   type: types.CHANGE_FILTER,
@@ -9,19 +12,42 @@ const fetchRequest = () => ({
   type: types.FETCH_REQUEST,
 });
 
-const fetchSuccess = items => ({
-  type: types.FETCH_SUCCESS,
-  payload: items,
-});
+const fetchSuccess = items => {
+  const normalizedMenu = normalize(items, [MenuSchema]);
+
+  return {
+    type: types.FETCH_SUCCESS,
+    payload: {
+      ids: {
+        menu: Object.keys(normalizedMenu.entities.menu),
+      },
+      entities: normalizedMenu.entities,
+    },
+  };
+};
+
+// const addItemSuccess = item => ({
+//   type: types.ADD_ITEM_SUCCESS,
+//   payload: item,
+// });
 
 const addItemSuccess = item => ({
   type: types.ADD_ITEM_SUCCESS,
-  payload: item,
+  payload: {
+    ids: {
+      menu: item.id,
+    },
+    entities: {
+      menu: {
+        [item.id]: { ...item },
+      },
+    },
+  },
 });
 
 const deleteItemSuccess = id => ({
   type: types.DELETE_ITEM_SUCCESS,
-  payload: id,
+  payload: id.toString(),
 });
 
 const fetchError = error => ({

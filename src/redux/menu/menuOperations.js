@@ -1,4 +1,4 @@
-import * as api from '../../../../services/menu-api';
+import * as api from '../../services/menu-api';
 import actions from './menuActions';
 
 // const fetchItems = () => async dispatch => {

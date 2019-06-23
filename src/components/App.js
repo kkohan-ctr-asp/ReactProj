@@ -57,6 +57,10 @@ const AsyncContactPage = lazy(() =>
   import(/* webpackChunkName: "Contact-page" */ '../pages/Contact'),
 );
 
+const AsyncCartPage = lazy(() =>
+  import(/* webpackChunkName: "Cart-page" */ '../pages/Cart'),
+);
+
 const AsyncDeliveryPage = lazy(() =>
   import(/* webpackChunkName: "Delivery-page" */ '../pages/Delivery'),
 );
@@ -97,6 +101,7 @@ const App = () => (
         <Route path={routes.account} component={AsyncAccountPage} />
         <Route path={routes.orderHistory} component={AsyncOrderHistoryPage} />
         <Route path={routes.planner} component={AsyncPlannerPage} />
+        <Route path={routes.cart} component={AsyncCartPage} />
         <Route component={AsyncNotFoundPage} />
       </Switch>
     </Suspense>

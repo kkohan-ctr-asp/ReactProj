@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getCategoryFromProps from '../../../utils/getCategoryFromProps';
 import DishesMenu from './DishesMenuView';
-import { menuSelectors, menuOperations } from '../Redux/menu';
+import { menuSelectors, menuOperations } from '../../../redux/menu';
 
 class DishesMenuContainer extends Component {
   componentDidMount() {
@@ -16,7 +16,6 @@ class DishesMenuContainer extends Component {
       });
       return;
     }
-
     fetchMenu(category);
   }
 

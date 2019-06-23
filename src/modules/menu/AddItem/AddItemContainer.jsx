@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { menuOperations } from '../Redux/menu';
+import { menuOperations } from '../../../redux/menu';
 
 import AddItemView from './AddItemView';
 
@@ -15,6 +15,7 @@ import AddItemView from './AddItemView';
 // };
 
 const TEST_ITEM = {
+  id: 'test',
   name: 'Test',
   description: 'TestTestTestTestTestTestTest',
   image: '',

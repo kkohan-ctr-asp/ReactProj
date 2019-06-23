@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Filter from './FilterView';
-import { menuSelectors, menuActions } from '../Redux/menu';
+import { menuSelectors, menuActions } from '../../../redux/menu';
 
 class FilterContainer extends Component {
   handleFilterChange = ({ target }) => {
