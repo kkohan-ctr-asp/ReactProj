@@ -9,7 +9,14 @@ import Loader from '../../../components/Loader/Loader';
 
 import s from './DishesMenu.module.css';
 
-const DishesMenu = ({ dishes, onDelete, location, isLoading, error }) => {
+const DishesMenu = ({
+  dishes = [],
+  onDelete,
+  addToCart,
+  location,
+  isLoading,
+  error,
+}) => {
   return (
     <div>
       <Filter />
@@ -41,6 +48,9 @@ const DishesMenu = ({ dishes, onDelete, location, isLoading, error }) => {
                 <div className="actions">
                   <button type="button" onClick={() => onDelete(dish.id)}>
                     Delete
+                  </button>
+                  <button type="button" onClick={() => addToCart(dish.id)}>
+                    Add to cart
                   </button>
                 </div>
               </li>

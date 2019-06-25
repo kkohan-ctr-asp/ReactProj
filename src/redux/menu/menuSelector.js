@@ -39,6 +39,7 @@ const getFilteredItems = createSelector(
 // );
 
 export default {
+  getItemsEntities,
   getCategories,
   getItems,
   getFilter,

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import getCategoryFromProps from '../../../utils/getCategoryFromProps';
 import DishesMenu from './DishesMenuView';
 import { menuSelectors, menuOperations } from '../../../redux/menu';
+import { cartActions } from '../../../redux/cart';
 
 class DishesMenuContainer extends Component {
   componentDidMount() {
@@ -29,13 +30,13 @@ class DishesMenuContainer extends Component {
     }
   }
 
-  handleDeleteItem = async id => {
+  handleDeleteItem = id => {
     const { deleteItem } = this.props;
     deleteItem(id);
   };
 
   render() {
-    const { menu, isLoading, error, location } = this.props;
+    const { menu, isLoading, error, location, addToCart } = this.props;
 
     return (
       <div>
@@ -45,6 +46,7 @@ class DishesMenuContainer extends Component {
           dishes={menu}
           onDelete={this.handleDeleteItem}
           location={location}
+          addToCart={addToCart}
         />
       </div>
     );
@@ -59,6 +61,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchMenu: menuOperations.fetchItems,
   deleteItem: menuOperations.deleteItem,
+  addToCart: cartActions.addToCart,
 };
 
 export default connect(

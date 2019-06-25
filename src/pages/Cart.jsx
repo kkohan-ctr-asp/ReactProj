@@ -1,10 +1,10 @@
 import React from 'react';
-import CartView from '../components/Cart/CartView';
+import Cart from '../components/Cart/CartContainer';
 
 const CartPage = () => (
   <div>
     <h2>Cart Page</h2>
-    <CartView />
+    <Cart />
   </div>
 );
 
