@@ -1,0 +1,18 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.link,
+link:visited,
+link:link,
+link:active {
+  padding: 4px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.link:hover {
+  color: palevioletred;
+}

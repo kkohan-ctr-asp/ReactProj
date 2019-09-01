@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Tab 1",
+    "content": {
+      "title": "Name pretium turpis",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est lectus, aliquet et mi at, rhoncus laoreentesque faucibus eu nibh quis semper. Etiam diam libero, laoreet eu commodo vitae, condimentum ut nunc. Aenean non"
+    }
+  },
+  {
+    "label": "Tab 2",
+    "content": {
+      "title": " Aliquam vulputate quam tortor, eget sodales sem ornare sed. Phasellus faucibus od",
+      "text": " Pellentesque faucibus eu nibh quis semper. Etiam diam libero, laoreet eu commodo vitae, condimentum ut nunc. Aenean non"
+    }
+  },
+  {
+    "label": "Tab 3",
+    "content": {
+      "title": "Laoreet eu commodo vita",
+      "text": "Pellentesque faucibus eu nibh quis semper. Etiam diam libero, laoreet eu commodo vitae, condimentum ut nunc. Aenean non"
+    }
+  }
+]
